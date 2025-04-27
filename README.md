@@ -1,8 +1,10 @@
-<p align="center"><a href="https://github.com/ibnsultan/polar" target="_blank"><img src="https://raw.githubusercontent.com/ibnsultan/polar/7ca21756a4f37072a8a5e714cf1488ed60487187/public/assets/images/logo-dark.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://github.com/ibnsultan/polar" target="_blank"><img src="https://raw.githubusercontent.com/ibnsultan/polar/7ca21756a4f37072a8a5e714cf1488ed60487187/public/assets/images/logo-dark.svg" width="400" alt="Polar Logo"></a></p>
 
 ## About Polar
 
 Polar is a modern, streamlined Laravel starter kit built on top of Jetstream, crafted to help you launch your next idea faster. Featuring a clean design, powerful tools, and the flexibility you expect from Laravel, Polar is here to help you build with confidence and joy.
+
+<p align="center"><a href="https://github.com/ibnsultan/polar" target="_blank"><img src="https://repository-images.githubusercontent.com/973318402/60b2dcc5-3e11-4421-b8be-bd3632ae9829" alt="Polar Screenshot"></a></p>
 
 ## Learning Polar
 
@@ -32,6 +34,7 @@ npm run build
 Finally, run the following command to start the development server:
 
 ```bash
+php artisan db:seed # to seed the database, only run this command once
 php artisan serve
 ```
 You can now access the application at `http://localhost:8000`.
