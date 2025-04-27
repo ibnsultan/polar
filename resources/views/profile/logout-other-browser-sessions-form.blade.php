@@ -52,7 +52,7 @@
         @endif
 
         <div class="flex items-center mt-5">
-            <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
+            <x-button wire:click="confirmLogout" wire:loading.attr="disabled" class="btn !btn-primary">
                 {{ __('Log Out Other Browser Sessions') }}
             </x-button>
 
