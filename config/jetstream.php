@@ -78,4 +78,24 @@ return [
 
     'profile_photo_disk' => 'public',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Application Theme
+    |--------------------------------------------------------------------------
+    |
+    | This configuration value determines the default theme that will be used
+    | when rendering the Jetstream application.
+    | 
+    | preset: 'preset-1' to 'preset-18'.
+    | mode: 'light' or 'dark'.
+    | layout: 'vertical', 'horizontal', 'compact', 'tab', 'color-header'
+    |
+    */
+    'theme' => [
+        'preset' => env('JETSTREAM_THEME_PRESET', 'preset-1'),
+        'mode' => env('JETSTREAM_THEME_MODE', 'light'),
+        'layout' => env('JETSTREAM_APP_LAYOUT', 'vertical'),
+        'admin_layout' => env('JETSTREAM_ADMIN_THEME_LAYOUT', 'vertical'),
+    ],
+
 ];
