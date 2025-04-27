@@ -8,9 +8,10 @@
     background-repeat: no-repeat;
     background-size: cover;
 ">
-    <div class="w-full sm:max-w-md bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <div class="w-full sm:max-w-md bg-white shadow-md overflow-hidden sm:rounded-lg"
+        style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;">
         <div class="flex flex-col sm:justify-center items-center pt-4">
-            {{ $logo }}
+            <img src="/assets/images/logo-dark.svg" alt="Logo" class="w-1/4 h-auto">
         </div>
 
         <div class="w-full sm:max-w-md mt-4 px-6 py-4">
