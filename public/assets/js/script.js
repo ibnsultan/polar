@@ -119,9 +119,6 @@ document.addEventListener('DOMContentLoaded', menu_click);
 
 // Initialize various components on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function () {
-  // feather icon start
-  feather.replace();
-  // feather icon end
 
   // Check for specific layout and add scrollbar if necessary(add scrollbar from 1024 screen size in horizontal layout)
   if (document.querySelector('html').hasAttribute('data-pc-layout')) {
@@ -244,18 +241,18 @@ function setLayout() {
     var script = document.createElement('script');
     if (layout === 'horizontal') {
       document.querySelector('.pc-sidebar').classList.add('d-none');
-      script.src = '../assets/js/layout-horizontal.js'; // Load script for horizontal layout
+      script.src = '/assets/js/layout-horizontal.js'; // Load script for horizontal layout
       document.body.appendChild(script);
     } else if (layout === 'color-header') {
       // Change logo color for color-header layout
       if (document.querySelector('.pc-sidebar .m-header .logo-lg')) {
-        document.querySelector('.pc-sidebar .m-header .logo-lg').setAttribute('src', '../assets/images/logo-white.svg');
+        document.querySelector('.pc-sidebar .m-header .logo-lg').setAttribute('src', '/assets/images/logo-white.svg');
       }
     } else if (layout === 'compact') {
-      script.src = '../assets/js/layout-compact.js'; // Load script for compact layout
+      script.src = '/assets/js/layout-compact.js'; // Load script for compact layout
       document.body.appendChild(script);
     } else if (layout === 'tab') {
-      script.src = '../assets/js/layout-tab.js'; // Load script for tab layout
+      script.src = '/assets/js/layout-tab.js'; // Load script for tab layout
       document.body.appendChild(script);
     }
   }
@@ -356,7 +353,7 @@ for (var l = 0; l < elem.length; l++) {
 
 // Change authentication logo
 document.querySelectorAll('.auth-main.v2 .img-brand').forEach((img) => {
-  img.setAttribute('src', '../assets/images/logo-white.svg');
+  img.setAttribute('src', '/assets/images/logo-white.svg');
 });
 
 // Function to remove CSS classes with a given prefix from a DOM node

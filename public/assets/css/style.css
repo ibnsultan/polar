@@ -7466,46 +7466,46 @@ table.\!dataTable thead tr >.dtfc-fixed-start:is([data-pc-theme="dark"] *),table
   white-space: nowrap;
 }
 .\!rounded-\[20px\]{
-  border-radius: var(--border-radius);
+  border-radius: 20px !important;
 }
 .\!rounded-full{
-  border-radius: var(--border-radius);
+  border-radius: 9999px !important;
 }
 .\!rounded-lg{
-  border-radius: var(--border-radius);
+  border-radius: 0.5rem !important;
 }
 .rounded{
-  border-radius: var(--border-radius);
+  border-radius: 0.25rem;
 }
 .rounded-2xl{
-  border-radius: var(--border-radius);
+  border-radius: 1rem;
 }
 .rounded-\[0_12px_0_0\]{
-  border-radius: var(--border-radius);
+  border-radius: 0 12px 0 0;
 }
 .rounded-\[10px\]{
-  border-radius: var(--border-radius);
+  border-radius: 10px;
 }
 .rounded-\[20px\]{
-  border-radius: var(--border-radius);
+  border-radius: 20px;
 }
 .rounded-\[6px\]{
-  border-radius: var(--border-radius);
+  border-radius: 6px;
 }
 .rounded-full{
-  border-radius: var(--border-radius);
+  border-radius: 9999px;
 }
 .rounded-lg{
-  border-radius: var(--border-radius);
+  border-radius: 0.5rem;
 }
 .rounded-md{
-  border-radius: var(--border-radius);
+  border-radius: 0.375rem;
 }
 .rounded-none{
-  border-radius: var(--border-radius);
+  border-radius: 0px;
 }
 .rounded-xl{
-  border-radius: var(--border-radius);
+  border-radius: 0.75rem;
 }
 .rounded-b-none{
   border-bottom-right-radius: 0px;
