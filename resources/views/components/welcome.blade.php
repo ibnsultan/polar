@@ -11,7 +11,7 @@
     </p>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 p-6 lg:p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-8 p-6 lg:p-8">
     <div class="card p-4 py-6">
         <div class="flex items-center">
             <i class="fas fa-users text-gray-400 text-2xl"></i>
