@@ -47,13 +47,16 @@
             @endif
 
             <div class="flex items-center justify-between mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ms-4">
+                <x-button class="bg-zinc-800 text-white hover:bg-zinc-700 px-4 py-2 rounded w-full">
                     {{ __('Register') }}
                 </x-button>
+            </div>
+
+            <div class="mt-5 text-center">
+                {{ __('Already have an account?') }}
+                <a href="{{ route('login') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:navigate>
+                    {{ __('Log in') }}
+                </a>
             </div>
         </form>
     </x-authentication-card>

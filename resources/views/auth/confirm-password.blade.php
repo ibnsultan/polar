@@ -18,8 +18,8 @@
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" autofocus />
             </div>
 
-            <div class="flex justify-end mt-4">
-                <x-button class="ms-4">
+            <div class="flex mt-4">
+                <x-button class="bg-zinc-800 text-white hover:bg-zinc-700 px-4 py-2 rounded w-full">
                     {{ __('Confirm') }}
                 </x-button>
             </div>

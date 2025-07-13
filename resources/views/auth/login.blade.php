@@ -25,21 +25,22 @@
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="............" required autocomplete="current-password" />
             </div>
 
-            <div class="block mt-4">
+            <div class="flex items-center justify-between mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-checkbox id="remember_me" name="remember" />
                     <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
-            </div>
 
-            <div class="flex items-center justify-between mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
-                        {{ __('Forgot your password?') }}
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 font-semibold" href="{{ route('password.request') }}" wire:navigate>
+                        {{ __('Reset password') }}
                     </a>
                 @endif
+            </div>
 
-                <x-button class="ms-4">
+            
+            <div class="w-full flex my-3">                
+                <x-button class="bg-zinc-800 text-white hover:bg-zinc-700 px-4 py-2 rounded w-full">
                     {{ __('Log in') }}
                 </x-button>
             </div>
