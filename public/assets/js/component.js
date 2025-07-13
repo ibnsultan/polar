@@ -372,7 +372,7 @@ tooltipElements.forEach(element => {
     const tooltip = document.createElement('div');
     tooltip.setAttribute('id', 'pctooltip');
     tooltip.innerHTML = tooltipTemplate;
-    tooltip.classList.add('z-[1024]');
+    tooltip.style.zIndex = 1200;
 
     // Initialize the tooltip with Popper.js for positioning
     Popper.createPopper(targetElement, tooltip, {
