@@ -1,6 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -19,5 +20,14 @@ export default {
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [
+        forms,
+        typography,
+
+        // Custom plugin for data-pc-theme variants
+        plugin(function ({ addVariant }) {
+            addVariant('pc-light', '[data-pc-theme="light"] &');
+            addVariant('pc-dark', '[data-pc-theme="dark"] &');
+        }),
+    ],
 };
