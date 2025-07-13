@@ -11,7 +11,7 @@
 				</li>
 				<li class="pc-h-item pc-sidebar-popup lg:hidden">
 					<a href="javascript:void(0)" class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="mobile-collapse">
-					    <i class="fa-solid fa-bars-staggeredtext-2xl leading-none"></i>
+					    <i class="fa-solid fa-bars-staggered text-2xl leading-none"></i>
 					</a>
 				</li>
 				<li class="pc-h-item max-md:hidden md:inline-flex">
@@ -31,7 +31,7 @@
 						aria-haspopup="false"
 						aria-expanded="false"
 						>
-                        <i class="fad fa-moon-stars"></i>
+                        <i class="fas fa-moon-stars"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
 						<a href="#!" class="dropdown-item" onclick="layout_change('dark')">
@@ -63,7 +63,7 @@
 						aria-haspopup="false"
 						aria-expanded="false"
 						>
-					    <i class="fad fa-earth-africa text-xs"></i>
+					    <i class="fas fa-earth-africa text-xs"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-end pc-h-dropdown lng-dropdown">
 						<a href="#!" class="dropdown-item" data-lng="en">
@@ -82,9 +82,7 @@
 				</li>
 				<li class="pc-h-item">
 					<a href="#" class="pc-head-link me-0" data-pc-toggle="offcanvas" data-pc-target="#announcement" aria-controls="announcement">
-						<svg class="pc-icon">
-							<use xlink:href="#custom-flash"></use>
-						</svg>
+						<i class="fas fa-bolt text-xs"></i>
 					</a>
 				</li>
 				<li class="dropdown pc-h-item">
@@ -96,9 +94,7 @@
 						aria-haspopup="false"
 						aria-expanded="false"
 						>
-						<svg class="pc-icon">
-							<use xlink:href="#custom-notification"></use>
-						</svg>
+						<i class="fas fa-bell text-xs"></i>
 						<span class="badge bg-success-500 text-white rounded-full z-10 absolute right-0 top-0">3</span>
 					</a>
 					<div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown p-2">
@@ -155,7 +151,7 @@
 						</div>
 					</div>
 				</li>
-				<li class="dropdown pc-h-item header-user-profile">
+				<li class="dropdown pc-h-item header-user-profile ml-3">
 					<a
 						class="pc-head-link dropdown-toggle arrow-none me-0"
 						data-pc-toggle="dropdown"
@@ -181,11 +177,10 @@
 								</div>
 								<hr class="border-secondary-500/10 my-4" />
                                 
-								<p class="text-span mb-3">{{ __('Settings') }}</p>
 								<a href="{{ route('profile.show') }}" class="dropdown-item">
 									<span>
-										<i class="ph-duotone ph-user mr-2"></i>
-										<span>{{ __('Profile') }}</span>
+										<i class="fa-regular fa-user mr-2"></i>
+										<span>{{ __('Account Settings') }}</span>
 									</span>
 								</a>
 
@@ -193,8 +188,8 @@
                                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                                     <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" class="dropdown-item">
                                         <span>
-                                            <i class="ph-duotone ph-users mr-2"></i>
-                                            <span>{{ __('Team Setting') }}</span>
+                                            <i class="fa-regular fa-gear mr-2"></i>
+                                            <span>{{ __('Team Management') }}</span>
                                         </span>
                                     </a>
                                 @endif
@@ -202,8 +197,8 @@
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <a href="{{ route('api-tokens.index') }}" class="dropdown-item">
                                         <span>
-                                            <i class="ph-duotone ph-key mr-2"></i>
-                                            <span>{{ __('API Tokens') }}</span>
+                                            <i class="fa-regular fa-key mr-2"></i>
+                                            <span>{{ __('APIs and Integrations') }}</span>
                                         </span>
                                     </a>
                                 @endif
@@ -211,7 +206,7 @@
 								<hr class="border-secondary-500/10 my-4" />
                                 
                                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                                    <p class="text-span mb-3">{{ __('Manage Team') }}</p>
+                                    <p class="text-span mb-3">{{ __('Teams') }}</p>
 
                                     @foreach (Auth::user()->allTeams() as $team)
                                         <x-switchable-team :team="$team" />
