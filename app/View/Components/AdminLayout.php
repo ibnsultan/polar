@@ -5,17 +5,13 @@ namespace App\View\Components;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class AppLayout extends Component
+class AdminLayout extends Component
 {
     public $title;
-    public $sidebar;
-    public $footer;
 
-    public function __construct($title = null, $sidebar = true, $footer = true)
+    public function __construct($title = null)
     {
         $this->title = $title;
-        $this->sidebar = $sidebar;
-        $this->footer = $footer;
     }
 
     /**
@@ -23,6 +19,6 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        return view('layouts.admin');
     }
 }

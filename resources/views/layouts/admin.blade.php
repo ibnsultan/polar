@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" class="{{ config('jetstream.theme.preset') }}" data-pc-sidebar-caption="false">
+<!doctype html>
+<html lang="en" class="{{ config('jetstream.theme.preset') }}">
 	<head>
         <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ isset($title) ? $title . ' - ' : '' }}{{ config('app.name', 'Laravel') }}</title>
-        <script> localStorage.setItem('layout', '{{ config('jetstream.theme.layout') }}'); </script>
+        <title>{{ isset($title) ? $title . ' | ' : '' }} {{ config('app.name', 'Laravel') }}</title>
+        <script> localStorage.setItem('layout', 'vertical'); </script>
 
 		<!-- fonts -->
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -21,11 +21,10 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])        
         @livewireStyles
-
 		@stack('styles')
 	</head>
     
-	<body class="{{ $sidebar ? '' : 'pc-sidebar-hide' }}">
+	<body>
 		<!-- [ Pre-loader ] start -->
 		<div class="loader-bg fixed inset-0 bg-white dark:bg-themedark-cardbg z-[1034] flex items-center justify-center">
 			<div class="loader-track h-[5px] w-[300px] overflow-hidden bg-primary-500/40 relative">
@@ -33,17 +32,17 @@
 			</div>
 		</div>
 
-        <!-- sidebar -->
-        <x-app.sidebar :sidebar="$sidebar" />
-        <x-app.header />
+        <!-- admin sidebar -->
+        <x-admin.sidebar />
+        
+        <!-- admin header -->
+        <x-admin.header />
 
         <!-- Page Content -->
         {{ $slot }}
 
-		<!-- page footer -->
-		<x-app.footer />
-        
-        <x-app.canvas.announcements />
+		<!-- admin footer -->
+		<x-admin.footer />
 
 		<!-- base plugins -->
 		<script src="/assets/js/plugins/simplebar.min.js"></script>
