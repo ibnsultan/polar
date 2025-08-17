@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use JoelButcher\Socialstream\HasConnectedAccounts;
+use JoelButcher\Socialstream\SetsProfilePhotoFromUrl;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
@@ -14,12 +16,14 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens;
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasConnectedAccounts;
     use HasFactory;
-    use HasProfilePhoto;
+    use HasProfilePhoto {
+        HasProfilePhoto::profilePhotoUrl as getPhotoUrl;
+    }
     use HasTeams;
     use Notifiable;
+    use SetsProfilePhotoFromUrl;
     use TwoFactorAuthenticatable;
 
     /**
@@ -31,10 +35,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_name',
     ];
 
+    protected $with = ['role'];
+
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
      * @var array<int, string>
      */
@@ -43,6 +50,15 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -55,15 +71,18 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Get the URL to the user's profile photo.
      */
-    protected function casts(): array
+    protected function profilePhotoUrl(): Attribute
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return filter_var($this->profile_photo_path, FILTER_VALIDATE_URL)
+            ? Attribute::get(fn () => $this->profile_photo_path)
+            : $this->getPhotoUrl();
+    }
+
+    # belong to role
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_name', 'name');
     }
 }
