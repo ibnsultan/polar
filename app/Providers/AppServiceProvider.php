@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->routesRegistrar();
+
+        $this->registerRouteDirective();
         $this->registerBladeDirectives();
     }
 
@@ -42,12 +44,12 @@ class AppServiceProvider extends ServiceProvider
         Route::middleware('api')
             ->prefix('hook')
             ->group(base_path('routes/hook.php'));
+        
+        Route::middleware(['web', 'auth', 'permission:access_admin_panel'])
+            ->prefix('admin')
+            ->group(base_path('routes/admin.php'));
 
-        Route::middleware(['web', 'auth'])
-            ->prefix('media')
-            ->group(base_path('routes/media.php'));
     }
-
 
     /**
      * Blade Directives
@@ -56,9 +58,6 @@ class AppServiceProvider extends ServiceProvider
     {
         View::addExtension('blade.css', 'blade');
         View::addExtension('blade.js', 'blade');
-        
-        // Register custom Blade directives
-        $this->registerRouteDirective();
     }
 
     /**
@@ -68,11 +67,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Define @route directive
         Blade::directive('route', function ($expression) {
-            $params = explode(',', trim($expression, "()'\""));
-            $routeName = trim($params[0], "'\" ");
-            $routeParams = isset($params[1]) ? trim($params[1], "'\" ") : '';
-
-            return "<?php echo route('$routeName', $routeParams); ?>";
+            return "<?php echo route($expression); ?>";
         });
     }
 
