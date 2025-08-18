@@ -2,11 +2,240 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body{
+    font-family: "Inter", sans-serif;
+}
+
 [x-cloak] {
     display: none;
 }
 
+.logo-sm {
+    display: none;
+}
 
-.btn-primary {
-    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+[data-pc-layout="compact"] .logo-lg {
+    display: none;
+}
+
+[data-pc-layout="compact"] .logo-sm {
+    display: block;
+    width: 40px;
+}
+
+.card-wrapper:hover .card {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    background-color: #f9fafb;
+    transform: translateY(-2px);
+}
+
+.highcharts-background {
+    @apply fill-none pc-dark:fill-[#1b232d];
+}
+
+.form-control {
+    @apply w-full rounded-md border-[#e7eaee] focus:ring-[rgb(var(--colors-primary-500))] focus:border-[rgb(var(--colors-primary-500))];
+    font-size: 14px;
+}
+
+input.form-control,
+select.form-control{
+    height: 45px;
+}
+
+.form-file {
+    @apply w-full rounded-md border border-[#e7eaee] px-2 py-2 focus:ring-[rgb(var(--colors-primary-500))] focus:border-[rgb(var(--colors-primary-500))];
+}
+
+.table-th {
+    @apply px-3 py-3.5 text-left text-sm font-semibold text-gray-900 pc-dark:text-gray-100;
+}
+
+.table-th:first-child {
+    @apply py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 pc-dark:text-gray-100 sm:pl-6 lg:pl-8;
+}
+
+.table-td {
+    @apply px-3 py-4 text-sm whitespace-nowrap text-gray-500 pc-dark:text-gray-300;
+}
+
+.table-td:first-child {
+    @apply py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 pc-dark:text-gray-100 sm:pl-6 lg:pl-8 col-span-2;
+}
+
+label.required::after {
+    content: " *";
+    color: red;
+}
+
+.badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-secondary {
+    @apply bg-gray-100 text-gray-800 pc-dark:bg-gray-700 pc-dark:text-gray-200;
+}
+
+.badge-success {
+    @apply bg-green-100 text-green-800 pc-dark:bg-green-700 pc-dark:text-green-200;
+}
+
+.badge-danger {
+    @apply bg-red-100 text-red-800 pc-dark:bg-red-700 pc-dark:text-red-200;
+}
+
+.badge-warning {
+    @apply bg-yellow-100 text-yellow-800 pc-dark:bg-yellow-700 pc-dark:text-yellow-200;
+}
+
+.form-checkbox {
+    @apply h-4 w-4 text-[rgb(var(--colors-primary-500))] border-gray-300 rounded focus:ring-[rgb(var(--colors-primary-500))] pc-dark:bg-gray-800 pc-dark:border-gray-600 pc-dark:focus:ring-[rgb(var(--colors-primary-500))];
+}
+
+/* custom select */
+.cs-wrapper {
+  position: relative;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.cs-display {
+    @apply block w-full px-4 py-2 text-sm leading-6 text-gray-700 appearance-none bg-white border border-gray-300 rounded shadow-sm pc-dark:bg-gray-800 pc-dark:text-gray-300 pc-dark:border-gray-600;
+    cursor: pointer;
+}
+
+.cs-dropdown {
+    @apply absolute top-full left-0 right-0 border border-gray-300 max-h-52 overflow-y-auto hidden z-50 mt-0.5 rounded-lg p-0.5 bg-white pc-dark:bg-gray-800 pc-dark:border-gray-600;
+}
+
+.cs-dropdown.open {
+  display: block;
+}
+
+.cs-option {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.cs-option:hover {
+  background: #10b98130;
+}
+
+.cs-option.selected {
+  background: #10b98130;
+}
+
+.cs-search {
+    @apply w-full box-border px-3 py-1.5 border-0 border-b border-gray-300 pc-dark:bg-gray-800 pc-dark:border-gray-600 focus:ring-0 focus:border-[rgb(var(--colors-primary-500))] mb-2;
+}
+
+/* flatpickr for pc-dark: theme variant*/
+.flatpickr-calendar {
+    @apply pc-dark:bg-gray-800 pc-dark:border-gray-600;
+}
+
+[data-pc-theme="dark"] .flatpickr-calendar {
+    box-shadow: 1px 0 0 #2d3748, -1px 0 0 #2d3748, 0 1px 0 #2d3748, 0 -1px 0 #2d3748, 0 3px 13px rgba(0, 0, 0, 0.5);
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month,
+.flatpickr-month {
+    @apply pc-dark:text-gray-100 pc-dark:fill-gray-100;
+}
+
+.flatpickr-current-month {
+    @apply pc-dark:text-gray-100 pc-dark:bg-gray-800 pc-dark:border-gray-800;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months:hover {
+    @apply border-gray-200 bg-white pc-dark:text-gray-100 pc-dark:bg-gray-800 pc-dark:border-gray-800;
+}
+
+.flatpickr-monthDropdown-months {
+    @apply border-gray-200 pc-dark:text-gray-100 pc-dark:bg-gray-800 pc-dark:border-gray-800;
+}
+
+.flatpickr-weekday{
+    @apply pc-dark:text-gray-100;
+}
+
+.flatpickr-day {
+    @apply pc-dark:text-gray-300 hover:pc-dark:bg-gray-700 pc-dark:hover:text-gray-100 pc-dark:focus:bg-[rgb(var(--colors-primary-500))] pc-dark:focus:text-white;
+}
+
+.flatpickr-day.today {
+    @apply border-[rgb(var(--colors-primary-500))] pc-dark:text-white;
+}
+
+.flatpickr-day.selected {
+    @apply bg-[rgb(var(--colors-primary-500))] pc-dark:text-white;
+}
+
+.flatpickr-day.prevMonthDay{
+    @apply pc-dark:text-gray-500;
+}
+
+.flatpickr-day.nextMonthDay{
+    @apply pc-dark:text-gray-500;
+}
+
+.flatpickr-time {
+    @apply pc-dark:bg-gray-800 pc-dark:border-gray-600;
+}
+
+.flatpickr-time input {
+    @apply pc-dark:bg-gray-800 pc-dark:text-gray-300 pc-dark:border-gray-600 focus:ring-0;
+}
+
+.flatpickr-time input:focus {
+    @apply pc-dark:bg-gray-800 pc-dark:text-gray-300 pc-dark:border-[rgb(var(--colors-primary-500))];
+}
+
+.flatpickr-time .numInputWrapper span.arrowUp:after, .flatpickr-current-month .numInputWrapper span.arrowUp:after {
+    @apply pc-dark:border-b-gray-200;
+}
+
+.flatpickr-time .numInputWrapper span.arrowDown:after, .flatpickr-current-month .numInputWrapper span.arrowDown:after {
+    @apply pc-dark:border-t-gray-200;
+}
+
+/* drop down menu items*/
+.dropdown-menu {
+    @apply absolute px-1 right-0 mt-2 w-48 bg-white pc-dark:bg-gray-800 rounded-md shadow-lg z-10 border border-gray-200 pc-dark:border-gray-700;
+}
+.dropdown-item {
+    @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 pc-dark:text-gray-300 pc-dark:hover:bg-gray-700;
+    cursor: pointer;
+}
+
+.card[disabled] {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.btn-close {
+    @apply text-lg flex items-center justify-center rounded w-7 h-7 hover:bg-red-100 hover:text-red-500;
+}
+
+/* Table styles */
+.table thead tr:first-child th {
+    @apply border-t-0;
+}
+
+.table.table-sm tr,
+.table.table-sm tr th,
+.table.table-sm tr td {
+    @apply text-sm py-1.5 px-2;
+}
+
+.no-styles-select {
+    /* revert the select styles to original state */
+    padding: 2px 8px;
+    background: unset;
+    color: unset;
+    font-size: inherit;
+    font-family: inherit;
+    appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
 }
