@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use JoelButcher\Socialstream\Http\Controllers\OAuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,4 +16,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-require __DIR__.'/socialstream.php';
+
+Route::group(['middleware' => config('socialstream.middleware', ['web'])], function () {
+    Route::get('/oauth/{provider}', [OAuthController::class, 'redirect'])->name('oauth.redirect');
+    Route::match(['get', 'post'], '/oauth/{provider}/callback', [OAuthController::class, 'callback'])->name('oauth.callback');
+});
