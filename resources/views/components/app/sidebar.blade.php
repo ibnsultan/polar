@@ -12,53 +12,39 @@
                     <label>Navigation</label>
                 </li>
 
-                <x-navigation.menu-item href="{{ route('dashboard') }}" icon="fas text-xs fa-grid-2">
+                <x-navigation.item href="{{ route('dashboard') }}" icon="fas text-xs fa-grid-2">
                     Dashboard
-                </x-menu-item>
+                </x-navigation-item>
 
                 <li class="pc-item pc-caption">
-                    <label data-i18n="Widget">Sample</label>
+                    <label>Sample</label>
                     <svg class="pc-icon">
-                        <use xlink:href="#custom-presentation-chart"></use>
+                        <i class="fas fa-ellipsis-h text-xs"></i>
                     </svg>
                 </li>
                 
-                <x-navigation.group-menu icon="fas fa-filter-list">
-                    Menu levels
-                    <x-slot name="submenu">
-                        <x-navigation.menu-item href="" icon="" >Level 2.1</x-navigation.menu-item>
-                        <x-navigation.group-menu icon="fas text-xs">
-                            Level 2.2
-                            <x-slot name="submenu">
-                                <x-navigation.menu-item href="" icon="" >Level 3.1</x-navigation.menu-item>
-                                <x-navigation.menu-item href="" icon="" >Level 3.2</x-navigation.menu-item>
-                                <x-navigation.group-menu icon="fas text-xs">
-                                    Level 3.3
-                                    <x-slot name="submenu">
-                                        <x-navigation.menu-item href="" icon="" >Level 4.1</x-navigation.menu-item>
-                                        <x-navigation.menu-item href="" icon="" >Level 4.2</x-navigation.menu-item>
-                                    </x-slot>
-                                </x-navigation.group-menu>
-                            </x-slot>
-                        </x-navigation.group-menu>
+                <x-navigation.group icon="fas fa-filter-list" title="Menu levels">
+                    <x-navigation.item>Level 2.1</x-navigation.menu-item>
+                    <x-navigation.group title="Level 2.2">
+                        <x-navigation.item>Level 3.1</x-navigation.menu-item>
+                        <x-navigation.item>Level 3.2</x-navigation.menu-item>
+                        <x-navigation.group title="Level 3.3">
+                            <x-navigation.item>Level 4.1</x-navigation.menu-item>
+                            <x-navigation.item>Level 4.2</x-navigation.menu-item>
+                        </x-navigation.group>
+                    </x-navigation.group>
 
-                        <x-navigation.group-menu icon="fas text-xs">
-                            Level 2.3
-                            <x-slot name="submenu">
-                                <x-navigation.menu-item href="" icon="" >Level 3.1</x-navigation.menu-item>
-                                <x-navigation.menu-item href="" icon="" >Level 3.2</x-navigation.menu-item>
-                                <x-navigation.group-menu icon="fas text-xs ">
-                                    Level 3.3
-                                    <x-slot name="submenu">
-                                        <x-navigation.menu-item href="" icon="" >Level 4.1</x-navigation.menu-item>
-                                        <x-navigation.menu-item href="" icon="" >Level 4.2</x-navigation.menu-item>
-                                    </x-slot>
-                                </x-navigation.group-menu>
-                            </x-slot>
-                        </x-navigation.group-menu>
-                    </x-slot>
-                </x-navigation.group-menu>
-            </ul>
+                    <x-navigation.group title="Level 2.3">
+                        <x-navigation.item>Level 3.1</x-navigation.menu-item>
+                        <x-navigation.item>Level 3.2</x-navigation.menu-item>
+                        <x-navigation.group title="Level 3.3">
+                            <x-navigation.item>Level 4.1</x-navigation.menu-item>
+                            <x-navigation.item>Level 4.2</x-navigation.menu-item>
+                        </x-navigation.group>
+                    </x-navigation.group>
+                </x-navigation.group>
+
+                
             </ul>
         </div>
     </div>
