@@ -11,8 +11,8 @@
     </p>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4 lg:gap-8 p-6 lg:p-8">
-    <div class="card p-4 py-6">
+<div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4 lg:gap-8 p-6 lg:p-8">
+    <div class="card p-4 py-6 mb-0">
         <div class="flex items-center">
             <i class="fas fa-users text-gray-400 text-2xl"></i>
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
@@ -25,7 +25,7 @@
         </p>
     </div>
 
-    <div class="card p-4 py-6">
+    <div class="card p-4 py-6 mb-0">
         <div class="flex items-center">
             <i class="fas fa-paint-brush text-gray-400 text-2xl"></i>
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
@@ -38,7 +38,7 @@
         </p>
     </div>
 
-    <div class="card p-4 py-6">
+    <div class="card p-4 py-6 mb-0">
         <div class="flex items-center">
             <i class="fas fa-lock text-gray-400 text-2xl"></i>
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
@@ -51,7 +51,7 @@
         </p>
     </div>
 
-    <div class="card p-4 py-6">
+    <div class="card p-4 py-6 mb-0">
         <div class="flex items-center">
             <i class="fas fa-code text-gray-400 text-2xl"></i>
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
