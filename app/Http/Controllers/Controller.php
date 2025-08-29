@@ -116,6 +116,55 @@ class Controller extends BaseController
     }
 
     /**
+     * Database exception evaluator to return a user-friendly error message.
+     *
+     * This method evaluates database-related exceptions and provides
+     * user-friendly error messages based on the SQLSTATE error codes.
+     *
+     * @param \Illuminate\Database\QueryException $e The database exception to evaluate.
+     * @return string A user-friendly error message.
+     */
+    protected function dbExceptionEvaluator($e)
+    {
+        $sqlState = $e->errorInfo[0] ?? null;
+        $message = $e->errorInfo[2] ?? null;
+
+        if(!$message) {
+            switch ($sqlState) {
+                case '23000': // Integrity constraint violation
+                    $message = 'This content violates a database constraint.'; break;
+                case '22001': // String data, right truncation
+                    $message = 'The data you are trying to save is too long.'; break;
+                case '42000': // Syntax error or access violation
+                    $message = 'There is an issue with the database query syntax or permissions.'; break;
+                case 'HY000': // General error
+                    $message = 'A general database error occurred. Please try again later.'; break;
+                case '42S02': // Table or view not found
+                    $message = 'The requested table or view does not exist in the database.'; break;
+                case '42S22': // Column not found
+                    $message = 'A required column is missing in the database.'; break;
+                case '23001': // Restrict violation
+                    $message = 'This operation violates a database restriction.'; break;
+                default:
+                    $message = 'An unexpected database error occurred. Please contact support.';
+            }
+        }
+
+        if(config('app.debug')) {
+            $this->exception = [
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ];
+        }
+
+        $this->status = false;
+        $this->message = $message;
+
+        return response()->json($this->data, 500);
+    }
+
+    /**
      * Try-catch Shorthand block for handling exceptions.
      * 
      * This method executes the provided callback function and catches any exceptions
@@ -129,6 +178,8 @@ class Controller extends BaseController
     {
         try {
             return $callback();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return $this->dbExceptionEvaluator($e);
         } catch (\Exception $e) {
             return $this->jsonException($e);
         }
