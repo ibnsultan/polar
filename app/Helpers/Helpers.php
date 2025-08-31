@@ -133,3 +133,24 @@ if(!function_exists('scope')) {
         return $scopeMap[$rolePermission->scope] ?? null;
     }
 }
+
+if(!function_exists('registration_enabled')) {
+    function registration_enabled()
+    {
+        return \App\Helpers\RegistrationHelper::isEnabled();
+    }
+}
+
+if(!function_exists('registration_allowed_domains')) {
+    function registration_allowed_domains()
+    {
+        return \App\Helpers\RegistrationHelper::getAllowedEmailDomains();
+    }
+}
+
+if(!function_exists('is_email_domain_allowed')) {
+    function is_email_domain_allowed($email)
+    {
+        return \App\Helpers\RegistrationHelper::isEmailDomainAllowed($email);
+    }
+}
