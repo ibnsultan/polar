@@ -269,14 +269,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize selectpicker if available
-    if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
-        // Initialize Bootstrap components if needed
-        const selectors = document.querySelectorAll('.form-selector');
-        // You might need to replace this with your preferred select library
-        // or implement custom select functionality
-    }
-
     // Handle system messages
     const systemMessage = document.getElementById('system-message');
     if (systemMessage) {
