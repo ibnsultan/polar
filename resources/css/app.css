@@ -43,6 +43,12 @@ select.form-control{
     height: 45px;
 }
 
+input[type="file"].form-control {
+    padding: 10px;
+    border: solid #e7eaee 1px;
+    @apply pc-light:border-[#e7eaee] pc-dark:border-[#303f50];
+}
+
 .form-file {
     @apply w-full rounded-md border border-[#e7eaee] px-2 py-2 focus:ring-[rgb(var(--colors-primary-500))] focus:border-[rgb(var(--colors-primary-500))];
 }
@@ -100,12 +106,12 @@ label.required::after {
 }
 
 .cs-display {
-    @apply block w-full px-4 py-2 text-sm leading-6 text-gray-700 appearance-none bg-white border border-gray-300 rounded shadow-sm pc-dark:bg-gray-800 pc-dark:text-gray-300 pc-dark:border-gray-600;
+    @apply block w-full px-4 py-2 text-sm leading-6 text-gray-700 appearance-none bg-white border border-[#e7eaee] rounded-md shadow-sm pc-dark:bg-[#263240] pc-dark:text-gray-300 pc-dark:border-gray-600;
     cursor: pointer;
 }
 
 .cs-dropdown {
-    @apply absolute top-full left-0 right-0 border border-gray-300 max-h-52 overflow-y-auto hidden z-50 mt-0.5 rounded-lg p-0.5 bg-white pc-dark:bg-gray-800 pc-dark:border-gray-600;
+    @apply absolute top-full left-0 right-0 border border-gray-300 max-h-52 overflow-y-auto hidden z-50 mt-0.5 rounded-lg p-0.5 bg-white pc-dark:bg-[#263240] pc-dark:border-gray-600;
 }
 
 .cs-dropdown.open {
@@ -113,16 +119,11 @@ label.required::after {
 }
 
 .cs-option {
-  padding: 8px;
-  cursor: pointer;
+  @apply m-0.5 cursor-pointer p-2.5;
 }
 
-.cs-option:hover {
-  background: #10b98130;
-}
-
-.cs-option.selected {
-  background: #10b98130;
+.cs-option.selected, .cs-option:hover {
+  @apply bg-[#f3f3f3] rounded-md pc-dark:bg-gray-700;
 }
 
 .cs-search {
