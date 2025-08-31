@@ -17,12 +17,23 @@
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="doe@mail.com" required autofocus />
             </div>
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <div class="relative" x-data="{ showPassword: false }">
+                    <x-input id="password" class="block mt-1 w-full pr-10" 
+                            x-bind:type="showPassword ? 'text' : 'password'" 
+                            placeholder="............" name="password" required autocomplete="current-password" />
+                    <button type="button" 
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                            x-on:click="showPassword = !showPassword">
+                        <i class="fas" 
+                           x-bind:class="showPassword ? 'fa-eye-slash' : 'fa-eye'" 
+                           class="text-gray-400 hover:text-gray-600"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="flex items-center justify-between mt-4"">
@@ -52,10 +63,13 @@
 
         <!-- register -->
         <div class="mt-5 text-center">
-            {{ __('Don\'t have an account?') }}
-            <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:navigate>
-                {{ __('Register') }}
-            </a>
+            @if (config('auth.registration.enabled', true))
+                {{ __('Don\'t have an account?') }}
+                
+                <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:navigate>
+                    {{ __('Register') }}
+                </a>
+            @endif
         </div>
     </x-authentication-card>
 </x-guest-layout>
