@@ -33,6 +33,15 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
+        // Apply registration middleware to registration routes
+        Fortify::registerView(function () {
+            // Check if registration is enabled before showing the view
+            if (!config('auth.registration.enabled', true)) {
+                return redirect()->route('login')->with('error', 'Registration is currently disabled.');
+            }
+            return view('auth.register');
+        });
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 

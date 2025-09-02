@@ -112,4 +112,21 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    /*
+    |----------------------------------------------------------------------
+    | Registration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define if user registration is enabled or not and determine
+    | the behavior of the registration process. i.e what email domains are
+    | allowed etc.
+    |
+    */
+
+    'registration' => [
+        'enabled' => env('AUTH_REGISTRATION_ENABLED', true),
+        'emails_allowed' => [
+            'gmail.com',
+        ],
+    ],
 ];
