@@ -10,30 +10,31 @@
         <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
             <ul class="pc-navbar">
 
-                <x-navigation.menu-item :tooltip="__('Dashboard')"
+                <x-navigation.item
                     :href="route('admin.dashboard')" active="dashboard" icon="fad text-xs fa-grid-2">
                     @lang('Dashboard')
-                </x-navigation.menu-item>
+                </x-navigation.item>
 
-                
-                <li class="pc-item pc-caption">
-                    <label>Access Control</label>
-                </li>
+                <x-navigation.item :href="route('admin.announcements.index')" active="announcement" icon="fas text-xs fa-bell">
+                    @lang('Announcements')
+                </x-navigation.item>
 
-                <x-navigation.menu-item
-                    :href="route('admin.roles.index')" active="roles" icon="fad text-xs fa-users-crown">
-                    @lang('Roles')
-                </x-navigation.menu-item>
+                <x-navigation.group title="Control" icon="fad text-xs fa-shield-alt">
+                    <x-navigation.item
+                        :href="route('admin.roles.index')" active="roles">
+                        @lang('Roles')
+                    </x-navigation.item>
 
-                <x-navigation.menu-item
-                    :href="route('admin.modules.list')" active="modules" icon="fad text-xs fa-cube">
-                    @lang('Modules')
-                </x-navigation.menu-item>
+                    <x-navigation.item
+                        :href="route('admin.modules.list')" active="modules">
+                        @lang('Modules')
+                    </x-navigation.item>
 
-                <x-navigation.menu-item
-                    :href="route('admin.permissions.index')" active="permissions" icon="fad text-xs fa-key">
-                    @lang('Permissions')
-                </x-navigation.menu-item>
+                    <x-navigation.item
+                        :href="route('admin.permissions.index')" active="permissions">
+                        @lang('Permissions')
+                    </x-navigation.item>
+                </x-navigation.group>
             </ul>
         </div>
     </div>

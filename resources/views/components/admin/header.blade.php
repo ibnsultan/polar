@@ -54,11 +54,6 @@
 						</a>
 					</div>
 				</li>
-				<li class="pc-h-item">
-					<a href="javascript:void(0)" class="pc-head-link me-0" data-pc-toggle="offcanvas" data-pc-target="#activities" aria-controls="activities">
-						<i class="fas fa-bolt text-xs"></i>
-					</a>
-				</li>
 				<li class="dropdown pc-h-item header-user-profile ml-3">
 					<a
 						class="pc-head-link dropdown-toggle arrow-none me-0"
@@ -85,57 +80,12 @@
 								</div>
 								<hr class="border-secondary-500/10 my-4" />
                                 
-								<a href="{{ route('profile.show') }}" class="dropdown-item">
+								<a href="{{ route('profile.show') }}" class="dropdown-item mb-3">
 									<span>
 										<i class="fa-regular fa-user mr-2"></i>
 										<span>{{ __('Account Settings') }}</span>
 									</span>
 								</a>
-
-                                <!-- team setting -->
-                                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                                    <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" class="dropdown-item">
-                                        <span>
-                                            <i class="fa-regular fa-gear mr-2"></i>
-                                            <span>{{ __('Team Management') }}</span>
-                                        </span>
-                                    </a>
-                                @endif
-                                
-                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                    <a href="{{ route('api-tokens.index') }}" class="dropdown-item">
-                                        <span>
-                                            <i class="fa-regular fa-key mr-2"></i>
-                                            <span>{{ __('APIs and Integrations') }}</span>
-                                        </span>
-                                    </a>
-                                @endif
-
-								<hr class="border-secondary-500/10 my-4" />
-                                
-                                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                                    <p class="text-span mb-3">{{ __('Teams') }}</p>
-
-                                    @foreach (Auth::user()->allTeams() as $team)
-                                        <x-switchable-team :team="$team" />
-                                    @endforeach
-                                    
-                                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                        <a href="{{ route('teams.create') }}" class="dropdown-item">
-                                            <span> {{ __('Create New Team') }}</span>
-                                            <div dir="ltr"
-                                                class="flex -space-x-2 overflow-hidden *:flex *:items-center *:justify-center *:rounded-full *:w-[30px] *:h-[30px] hover:*:z-10 *:border-2 *:border-white"
-                                                >
-                                                <span class="avtar bg-primary text-white">
-                                                    <svg class="pc-icon m-0">
-                                                        <use xlink:href="#custom-add-outline"></use>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </a>
-                                    @endcan
-                                    <hr class="border-secondary-500/10 my-4" />
-                                @endif
 
 								<div class="grid mb-3">
                                     <form method="POST" action="{{ route('logout') }}" x-data>
