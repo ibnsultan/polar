@@ -89,68 +89,308 @@
 					<a
 						class="pc-head-link dropdown-toggle me-0"
 						data-pc-toggle="dropdown"
-						href="#"
+						href="javascript:void(0)"
 						role="button"
 						aria-haspopup="false"
 						aria-expanded="false"
 						>
 						<i class="fas fa-bell text-xs"></i>
-						<span class="badge bg-success-500 text-white rounded-full z-10 absolute right-0 top-0">3</span>
+						<span id="notification-badge" class="badge bg-success-500 text-white rounded-full z-10 absolute right-0 top-0" style="display: none;">0</span>
 					</a>
 					<div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown p-2">
 						<div class="dropdown-header flex items-center justify-between py-4 px-5">
 							<h5 class="m-0">Notifications</h5>
-							<a href="#!" class="btn btn-link btn-sm">Mark all read</a>
+							<a href="javascript:void(0)" class="btn btn-link btn-sm" id="mark-all-read-btn">Mark all read</a>
 						</div>
-						<div class="dropdown-body header-notification-scroll relative py-4 px-5" style="max-height: calc(100vh - 215px)">
-							<p class="text-span mb-3">Today</p>
-							<div class="card mb-2">
-								<div class="card-body">
-									<div class="flex gap-4">
-										<div class="shrink-0">
-											<svg class="pc-icon text-primary w-[22px] h-[22px]">
-												<use xlink:href="#custom-layer"></use>
-											</svg>
-										</div>
-										<div class="grow">
-											<span class="float-end text-sm text-muted">2 min ago</span>
-											<h5 class="text-body mb-2">UI/UX Design</h5>
-											<p class="mb-0">
-												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-												type and scrambled it to make a type
-											</p>
-										</div>
-									</div>
+						<div class="dropdown-body header-notification-scroll relative py-4 px-5" style="max-height: calc(100vh - 215px)" id="notifications-container">
+							<div class="text-center py-4" id="notifications-loading">
+								<div class="spinner-border spinner-border-sm" role="status">
+									<span class="sr-only">Loading...</span>
 								</div>
+								<p class="mt-2 text-muted">Loading notifications...</p>
 							</div>
-							<p class="text-span mb-3 mt-4">Yesterday</p>
-							<div class="card mb-2">
-								<div class="card-body">
-									<div class="flex gap-4">
-										<div class="shrink-0">
-											<svg class="pc-icon text-primary w-[22px] h-[22px]">
-												<use xlink:href="#custom-document-text"></use>
-											</svg>
-										</div>
-										<div class="grow ms-3">
-											<span class="float-end text-sm text-muted">2 hour ago</span>
-											<h5 class="text-body mb-2">Forms</h5>
-											<p class="mb-0">
-												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-												type and scrambled it to make a type
-											</p>
-										</div>
-									</div>
-								</div>
+							<div id="notifications-empty" style="display: none;" class="text-center py-4">
+								<i class="fas fa-bell-slash text-muted mb-2" style="font-size: 2rem;"></i>
+								<p class="text-muted">No notifications yet</p>
 							</div>
+							<div id="notifications-list"></div>
 						</div>
 						<div class="text-center py-2">
-							<a href="#!" class="text-danger-500 hover:text-danger-600 focus:text-danger-600 active:text-danger-600">
+							<a href="javascript:void(0)" class="text-danger-500 hover:text-danger-600 focus:text-danger-600 active:text-danger-600" id="clear-all-notifications">
 							Clear all Notifications
 							</a>
 						</div>
 					</div>
 				</li>
+
+				<x-script>
+					document.addEventListener('DOMContentLoaded', function() {
+						const notificationBadge = document.getElementById('notification-badge');
+						const notificationsContainer = document.getElementById('notifications-container');
+						const notificationsLoading = document.getElementById('notifications-loading');
+						const notificationsEmpty = document.getElementById('notifications-empty');
+						const notificationsList = document.getElementById('notifications-list');
+						const markAllReadBtn = document.getElementById('mark-all-read-btn');
+						const clearAllBtn = document.getElementById('clear-all-notifications');
+
+						// Load notifications when dropdown is opened
+						const notificationDropdown = document.querySelector('.dropdown-notification').closest('.dropdown');
+						let notificationsLoaded = false;
+
+						notificationDropdown.addEventListener('show.bs.dropdown', function() {
+							if (!notificationsLoaded) {
+								loadNotifications();
+								notificationsLoaded = true;
+							}
+						});
+
+						// Load unread count on page load
+						loadUnreadCount();
+						loadNotifications();
+
+						function loadNotifications() {
+							showLoading();
+							
+							fetch('/app/notifications', {
+								method: 'GET',
+								headers: {
+									'Content-Type': 'application/json',
+									'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+								}
+							})
+							.then(response => response.json())
+							.then(data => {
+								hideLoading();
+								if (data.status && data.notifications) {
+									displayNotifications(data.notifications);
+									updateUnreadCount(data.unreadCount || 0);
+								} else {
+									showEmpty();
+								}
+							})
+							.catch(error => {
+								console.error('Error loading notifications:', error);
+								hideLoading();
+								showEmpty();
+							});
+						}
+
+						function loadUnreadCount() {
+							fetch('/app/notifications/unread-count', {
+								method: 'GET',
+								headers: {
+									'Content-Type': 'application/json',
+									'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+								}
+							})
+							.then(response => response.json())
+							.then(data => {
+								if (data.status) {
+									updateUnreadCount(data.unreadCount || 0);
+
+									// hide mark notification as read button and clear notification button if no unread notifications
+									if (data.unreadCount === 0) {
+										markAllReadBtn.style.display = 'none';
+										clearAllBtn.style.display = 'none';
+									}
+								}
+							})
+							.catch(error => {
+								console.error('Error loading unread count:', error);
+							});
+						}
+
+						function displayNotifications(notifications) {
+							notificationsList.innerHTML = '';
+							
+							if (notifications.length === 0) {
+								showEmpty();
+								return;
+							}
+
+							notifications.forEach(notification => {
+								const notificationElement = createNotificationElement(notification);
+								notificationsList.appendChild(notificationElement);
+							});
+						}
+
+						function createNotificationElement(notification) {
+							const div = document.createElement('div');
+							div.className = `card mb-2 ${notification.is_read ? 'opacity-60' : ''}`;
+							div.dataset.notificationId = notification.id;
+							
+							const typeIcons = {
+								'success': 'fas fa-check-circle text-success',
+								'error': 'fas fa-exclamation-triangle text-danger',
+								'warning': 'fas fa-exclamation-circle text-warning',
+								'info': 'fas fa-info-circle text-primary'
+							};
+							
+							const iconClass = notification.icon || typeIcons[notification.type] || 'fas fa-bell text-primary';
+							const timeAgo = formatTimeAgo(new Date(notification.created_at));
+							
+							div.innerHTML = `
+								<div class="card-body">
+									<div class="flex gap-4">
+										<div class="shrink-0">
+											<i class="${iconClass} w-[22px] h-[22px]"></i>
+										</div>
+										<div class="grow">
+											<span class="float-end text-sm text-muted">${timeAgo}</span>
+											<h5 class="text-body mb-2">${notification.title}</h5>
+											<p class="mb-0">${notification.message}</p>
+											${notification.action_url ? `
+												<div class="mt-2">
+													<a href="${notification.action_url}" class="btn btn-sm btn-primary">
+														${notification.action_text || 'View'}
+													</a>
+												</div>
+											` : ''}
+										</div>
+									</div>
+								</div>
+							`;
+							
+							// Add click handler to mark as read
+							div.addEventListener('click', function() {
+								if (!notification.is_read) {
+									markAsRead(notification.id, div);
+								}
+							});
+							
+							return div;
+						}
+
+						function markAsRead(notificationId, element) {
+							fetch(`/app/notifications/${notificationId}/read`, {
+								method: 'PATCH',
+								headers: {
+									'Content-Type': 'application/json',
+									'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+								}
+							})
+							.then(response => response.json())
+							.then(data => {
+								if (data.status) {
+									element.classList.add('opacity-60');
+									loadUnreadCount(); // Refresh unread count
+								}
+							})
+							.catch(error => {
+								console.error('Error marking notification as read:', error);
+							});
+						}
+
+						function markAllAsRead() {
+							fetch('/app/notifications/mark-all-read', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+									'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+								}
+							})
+							.then(response => response.json())
+							.then(data => {
+								if (data.status) {
+									// Mark all notification elements as read
+									const notificationElements = notificationsList.querySelectorAll('.card');
+									notificationElements.forEach(el => el.classList.add('opacity-60'));
+									updateUnreadCount(0);
+								}
+							})
+							.catch(error => {
+								console.error('Error marking all as read:', error);
+							});
+						}
+
+						// clear only read notifications
+						function clearOnlyReadNotifications() {
+							fetch('/app/notifications/delete-all-read', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+									'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+								}
+							})
+							.then(response => response.json())
+							.then(data => {
+								if (data.status) {
+									// Remove all read notification elements
+									const notificationElements = notificationsList.querySelectorAll('.card');
+									notificationElements.forEach(el => {
+										if (el.classList.contains('opacity-60')) {
+											el.remove();
+										}
+									});
+
+									toast.success({message: `@lang('All read notifications have been cleared.')`});
+								}
+							})
+							.catch(error => {
+								console.error('Error clearing only read notifications:', error);
+							});
+						}
+
+						function updateUnreadCount(count) {
+							if (count > 0) {
+								notificationBadge.textContent = count > 99 ? '99+' : count;
+								notificationBadge.style.display = 'block';
+							} else {
+								notificationBadge.style.display = 'none';
+							}
+						}
+
+						function showLoading() {
+							notificationsLoading.style.display = 'block';
+							notificationsEmpty.style.display = 'none';
+							notificationsList.style.display = 'none';
+						}
+
+						function hideLoading() {
+							notificationsLoading.style.display = 'none';
+							notificationsList.style.display = 'block';
+						}
+
+						function showEmpty() {
+							notificationsLoading.style.display = 'none';
+							notificationsEmpty.style.display = 'block';
+							notificationsList.style.display = 'none';
+						}
+
+						function formatTimeAgo(date) {
+							const now = new Date();
+							const diff = now - date;
+							const minutes = Math.floor(diff / 60000);
+							const hours = Math.floor(diff / 3600000);
+							const days = Math.floor(diff / 86400000);
+							
+							if (minutes < 1) return 'Just now';
+							if (minutes < 60) return `${minutes} min ago`;
+							if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+							return `${days} day${days > 1 ? 's' : ''} ago`;
+						}
+
+						// Event listeners
+						markAllReadBtn.addEventListener('click', markAllAsRead);
+						
+						clearAllBtn.addEventListener('click', function() {
+							Swal.fire({
+								title: 'Are you sure?',
+								text: "This will clear all read notifications.",
+								icon: 'warning',
+								showCancelButton: true,
+								confirmButtonColor: '#3085d6',
+								cancelButtonColor: '#d33',
+								confirmButtonText: 'Yes, clear them!'
+							}).then((result) => {
+								if (result.isConfirmed) {
+									clearOnlyReadNotifications();
+								}
+							});
+						});
+					});
+				</x-script>
+
 				<li class="dropdown pc-h-item header-user-profile ml-3">
 					<a
 						class="pc-head-link dropdown-toggle arrow-none me-0"
@@ -228,9 +468,7 @@
                                                 class="flex -space-x-2 overflow-hidden *:flex *:items-center *:justify-center *:rounded-full *:w-[30px] *:h-[30px] hover:*:z-10 *:border-2 *:border-white"
                                                 >
                                                 <span class="avtar bg-primary text-white">
-                                                    <svg class="pc-icon m-0">
-                                                        <use xlink:href="#custom-add-outline"></use>
-                                                    </svg>
+                                                    <i class="fa-solid fa-plus"></i>
                                                 </span>
                                             </div>
                                         </a>
