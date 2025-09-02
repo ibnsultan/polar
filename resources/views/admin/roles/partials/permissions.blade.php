@@ -1,7 +1,7 @@
 <x-dialog.canvas id="permissionsOffcanvas" layout="offcanvas-end" class="!w-full">
     <div class="offcanvas-header !pb-0">
         <h5 class="offcanvas-title font-bold" id="permissionsOffcanvasLabel"></h5>
-        <button type="button" class="btn-close" data-pc-modal-dismiss="#permissionsOffcanvas">
+        <button type="button" class="btn-close" data-pc-dismiss="#permissionsOffcanvas">
             <i class="fas fa-times"></i>
         </button>
     </div>
