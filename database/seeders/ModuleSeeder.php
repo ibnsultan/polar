@@ -29,6 +29,11 @@ class ModuleSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Core',
                 'description' => 'Core module for basic functionalities',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Announcements',
+                'description' => 'Announcement management module',
             ]
         ]);
     }

@@ -17,6 +17,10 @@ class PermissionSeeder extends Seeder
     {
         Permission::insert([
             ['name' => 'access_admin_panel', 'module_id' => 1, 'scopes' => json_encode(['none', 'all'])],
+            ['name' => 'view_announcements', 'module_id' => 2, 'scopes' => json_encode(['none', 'all'])],
+            ['name' => 'create_announcements', 'module_id' => 2, 'scopes' => json_encode(['none', 'all'])],
+            ['name' => 'update_announcements', 'module_id' => 2, 'scopes' => json_encode(['none', 'owned', 'all'])],
+            ['name' => 'delete_announcements', 'module_id' => 2, 'scopes' => json_encode(['none', 'owned', 'all'])],
         ]);
 
         // seed role permissions
