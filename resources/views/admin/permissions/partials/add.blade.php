@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">@lang('Add New Permission')</h5>
-            <button type="button" class="btn-close" data-pc-modal-dismiss="#addPermissionModal">
+            <button type="button" class="btn-close" data-pc-dismiss="#addPermissionModal">
                 <i class="fas fa-times"></i>
             </button>
         </div>
