@@ -85,4 +85,38 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_name', 'name');
     }
+
+    /**
+     * Get notifications for this user
+     */
+    public function notifications()
+    {
+        return $this->belongsToMany(Notification::class, 'notification_users')
+                    ->withPivot(['is_read', 'read_at', 'sent_at'])
+                    ->withTimestamps();
+    }
+
+    /**
+     * Get unread notifications for this user
+     */
+    public function unreadNotifications()
+    {
+        return $this->notifications()->wherePivot('is_read', false);
+    }
+
+    /**
+     * Get read notifications for this user
+     */
+    public function readNotifications()
+    {
+        return $this->notifications()->wherePivot('is_read', true);
+    }
+
+    /**
+     * Get notifications created by this user
+     */
+    public function createdNotifications()
+    {
+        return $this->hasMany(Notification::class, 'created_by');
+    }
 }
