@@ -18,33 +18,32 @@
 
                 <li class="pc-item pc-caption">
                     <label>Sample</label>
-                    <svg class="pc-icon">
+                    <span class="pc-icon">
                         <i class="fas fa-ellipsis-h text-xs"></i>
-                    </svg>
+                    </span>
                 </li>
                 
                 <x-navigation.group icon="fas fa-filter-list" title="Menu levels">
-                    <x-navigation.item>Level 2.1</x-navigation.menu-item>
+                    <x-navigation.item>Level 2.1</x-navigation.item>
                     <x-navigation.group title="Level 2.2">
-                        <x-navigation.item>Level 3.1</x-navigation.menu-item>
-                        <x-navigation.item>Level 3.2</x-navigation.menu-item>
+                        <x-navigation.item>Level 3.1</x-navigation.item>
+                        <x-navigation.item>Level 3.2</x-navigation.item>
                         <x-navigation.group title="Level 3.3">
-                            <x-navigation.item>Level 4.1</x-navigation.menu-item>
-                            <x-navigation.item>Level 4.2</x-navigation.menu-item>
+                            <x-navigation.item>Level 4.1</x-navigation.item>
+                            <x-navigation.item>Level 4.2</x-navigation.item>
                         </x-navigation.group>
                     </x-navigation.group>
 
                     <x-navigation.group title="Level 2.3">
-                        <x-navigation.item>Level 3.1</x-navigation.menu-item>
-                        <x-navigation.item>Level 3.2</x-navigation.menu-item>
+                        <x-navigation.item>Level 3.1</x-navigation.item>
+                        <x-navigation.item>Level 3.2</x-navigation.item>
                         <x-navigation.group title="Level 3.3">
-                            <x-navigation.item>Level 4.1</x-navigation.menu-item>
-                            <x-navigation.item>Level 4.2</x-navigation.menu-item>
+                            <x-navigation.item>Level 4.1</x-navigation.item>
+                            <x-navigation.item>Level 4.2</x-navigation.item>
                         </x-navigation.group>
                     </x-navigation.group>
                 </x-navigation.group>
-
-                
+                    
             </ul>
         </div>
     </div>
