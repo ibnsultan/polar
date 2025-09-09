@@ -396,3 +396,89 @@ tooltipElements.forEach(element => {
   });
 });
 // -----------------------------4
+// ==============================
+// Global API for Offcanvas and Modal
+// ==============================
+
+window.pcOffcanvas = {
+  open(target) {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (el) {
+      el.classList.add('show');
+      let backdrop = document.getElementById('offcanvasoverlay');
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'fixed inset-0 bg-gray-900/20 z-[1027] backdrop-blur-sm';
+        backdrop.id = 'offcanvasoverlay';
+        document.body.appendChild(backdrop);
+        backdrop.addEventListener('click', offcanvasclose);
+      }
+    }
+  },
+  close(target) {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (el) {
+      el.classList.remove('show');
+    }
+    const backdrop = document.getElementById('offcanvasoverlay');
+    if (backdrop) backdrop.remove();
+  },
+  toggle(target) {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (el) {
+      if (el.classList.contains('show')) {
+        this.close(el);
+      } else {
+        this.open(el);
+      }
+    }
+  }
+};
+
+window.pcModal = {
+  open(target) {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (el) {
+      el.classList.add('show');
+      setTimeout(() => {
+        el.classList.add('animate');
+      }, 100);
+      let backDropOverlay = document.getElementById('modaloverlay');
+      if (!backDropOverlay) {
+        backDropOverlay = document.createElement('div');
+        backDropOverlay.className = 'fixed inset-0 bg-gray-900/20 z-[1028] backdrop-blur-sm';
+        backDropOverlay.id = 'modaloverlay';
+        document.body.appendChild(backDropOverlay);
+        document.body.classList.add('modal-open');
+        backDropOverlay.addEventListener('click', modalclose);
+      }
+    }
+  },
+  close(target) {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (el) {
+      el.classList.remove('animate');
+      setTimeout(() => {
+        el.classList.remove('show');
+        document.body.classList.remove('modal-open');
+        if (typeof removeClassByPrefix === 'function') {
+          removeClassByPrefix(el, 'anim-');
+        }
+        const backDropOverlay = document.getElementById('modaloverlay');
+        if (backDropOverlay) {
+          backDropOverlay.remove();
+        }
+      }, 300);
+    }
+  },
+  toggle(target) {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (el) {
+      if (el.classList.contains('show')) {
+        this.close(el);
+      } else {
+        this.open(el);
+      }
+    }
+  }
+};
