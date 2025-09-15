@@ -14,17 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-        // disable foreign key checks to avoid issues with existing data
-        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-        // truncate tables to start fresh
-        User::truncate();
-        Role::truncate();
-
-        // enable foreign key checks again
-        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
         // Seed Roles
         Role::insert([
             [
