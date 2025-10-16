@@ -165,7 +165,8 @@ async function submitForm(event) {
     }
 
     const headers = {
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json'
     };
 
     if (!isMultipart) {
