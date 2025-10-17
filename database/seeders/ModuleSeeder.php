@@ -18,6 +18,7 @@ class ModuleSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Core',
+                'is_core' => 1,
                 'description' => 'Core module for basic functionalities',
             ],
             [
