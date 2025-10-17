@@ -9,15 +9,18 @@
         <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption">
-                    <label>Navigation</label>
+                    <label>@lang('Navigation')</label>
+                    <span class="pc-icon">
+                        <i class="fas fa-speedometer text-xs"></i>
+                    </span>
                 </li>
 
-                <x-navigation.item href="{{ route('dashboard') }}" icon="fas text-xs fa-grid-2">
-                    Dashboard
-                </x-navigation-item>
+                <x-navigation.item :href="route('dashboard')" icon="fas text-xs fa-grid-2">
+                    @lang('Dashboard')
+                </x-navigation.item>
 
                 <li class="pc-item pc-caption">
-                    <label>Sample</label>
+                    <label>@lang('Sample')</label>
                     <span class="pc-icon">
                         <i class="fas fa-ellipsis-h text-xs"></i>
                     </span>
